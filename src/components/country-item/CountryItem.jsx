@@ -8,7 +8,7 @@ const CountryItem = ({country}) => {
     const countyClass = country.name.common === 'Nepal' ? styles.nepal : ''
 
     const onClick = () => {
-        navigate(`countries/${country.name.common}`)
+        navigate(`countries/${country.cca3}`)
     }
 
     return (

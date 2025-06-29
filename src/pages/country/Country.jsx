@@ -14,7 +14,7 @@ const Country = () => {
     const error = useSelector(state => state.countryPage.error)
 
     useEffect(() => {
-        dispatch(fetchCountry(params.countryName))
+        dispatch(fetchCountry(params.cca3))
 
         return () => {
             dispatch(removeCountry())

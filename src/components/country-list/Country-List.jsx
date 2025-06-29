@@ -4,11 +4,11 @@ import styles from './CountryList.module.css'
 import CountryItem from "../country-item/CountryItem";
 import CompassPreloader from "../../UI/compass-preloader/CompassPreloader";
 import {fetchCountries} from "../../services/countries/thunk";
-
+import {sortAndFilterCountries} from '../../services/countries/slice'
 
 const CountryList = () => {
 
-    const countries = useSelector(state => state.countries.items)
+    const countries = useSelector(state => state.countries.filteredItems)
     const loading = useSelector(state => state.countries.loading)
     const error = useSelector(state => state.countries.error)
 
@@ -17,7 +17,7 @@ const CountryList = () => {
     useEffect(() => {
         if (!countries) {
             dispatch(fetchCountries());
-        }
+        }     
     }, [dispatch, countries])
 
     if (loading) {

@@ -13,7 +13,7 @@ function App() {
             <main className={styles.main}>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path='countries/:countryName' element={<Country />}/>
+                    <Route path='countries/:cca3' element={<Country />}/>
                 </Routes>
             </main>
           </>

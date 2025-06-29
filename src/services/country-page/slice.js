@@ -11,20 +11,20 @@ export const countrySlice = createSlice({
     name: 'country-page',
     initialState,
     reducers: {
-        removeCountry: (state, action) => {
+        removeCountry: (state) => {
             state.item = null
-        }
+        },
     },
     extraReducers: builder => {
         builder
-            .addCase(fetchCountry.pending, (state, action) => {
+            .addCase(fetchCountry.pending, (state) => {
                 state.loading = true
             })
             .addCase(fetchCountry.fulfilled, (state, action) => {
                 state.loading = false
                 state.item = action.payload
             })
-            .addCase(fetchCountry.rejected, (state, action) => {
+            .addCase(fetchCountry.rejected, (state) => {
                 state.loading = false
                 state.error = true
             })

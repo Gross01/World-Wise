@@ -3,9 +3,9 @@ import {COUNTRY_PAGE_URL} from "../../utils/constants";
 
 export const fetchCountry = createAsyncThunk(
     'country/fetchCountry',
-    async (countryName, thunkAPI) => {
+    async (cca3, thunkAPI) => {
         try {
-            const response = await fetch(COUNTRY_PAGE_URL + countryName, {
+            const response = await fetch(COUNTRY_PAGE_URL + cca3, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
