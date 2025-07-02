@@ -13,7 +13,7 @@ const CountryItem = ({country}) => {
 
     return (
         <li onClick={onClick} className={`${styles.li} ${countyClass}`} key={country.name.common}>
-            <img className={styles.flag} src={country.flags.svg} alt={country.flags.alt}/>
+            <img className={styles.flag} src={country.flags.png} alt={country.flags.alt}/>
             <span className={styles.name}>{country.name?.common}</ span>
         </li>
     );

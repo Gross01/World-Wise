@@ -4,7 +4,6 @@ import styles from './CountryList.module.css'
 import CountryItem from "../country-item/CountryItem";
 import CompassPreloader from "../../UI/compass-preloader/CompassPreloader";
 import {fetchCountries} from "../../services/countries/thunk";
-import {sortAndFilterCountries} from '../../services/countries/slice'
 
 const CountryList = () => {
 

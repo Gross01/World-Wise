@@ -18,7 +18,7 @@ const CountrySearch = () => {
         return () => {
             clearTimeout(timerId)
         }
-    }, [searchQuery, dispatch])
+    }, [searchQuery, dispatch, countries])
 
     return (
         <div className={styles.div}>

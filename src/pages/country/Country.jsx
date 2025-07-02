@@ -4,6 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchCountry} from "../../services/country-page/thunk";
 import CompassPreloader from "../../UI/compass-preloader/CompassPreloader";
 import {removeCountry} from "../../services/country-page/slice";
+import styles from './Country.module.css'
+import CountryCard from "../../components/country-card/CountryCard";
 
 const Country = () => {
 
@@ -23,7 +25,9 @@ const Country = () => {
 
     if (loading) {
         return (
-            <CompassPreloader />
+            <div className={styles.preloaderDiv}>
+                <CompassPreloader />
+            </div>
         )
     }
 
@@ -31,9 +35,7 @@ const Country = () => {
         !loading &&
             !error &&
             countryInfo &&
-            <div>
-                {countryInfo[0]?.name.common}
-            </div>
+            <CountryCard countryInfo={countryInfo} />
     );
 };
 
