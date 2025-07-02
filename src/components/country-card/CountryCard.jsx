@@ -6,6 +6,7 @@ import {safeObjectValues} from "../../utils/safe-object-values";
 import {Link} from "react-router-dom";
 import Map from "../map/Map";
 import BackButton from "../../UI/back-button/BackButton";
+import {formatNumber} from '../../utils/format-number'
 
 const CountryCard = ({countryInfo}) => {
 
@@ -50,9 +51,9 @@ const CountryCard = ({countryInfo}) => {
                     <Map latlng={countryInfo?.latlng}/>
                 </div>
                 <div className={styles.asideBlock}>
-                    <InfoBlock caption='Population' text={checkProperty(countryInfo.population)}/>
+                    <InfoBlock caption='Population' text={checkProperty(countryInfo.population, formatNumber(countryInfo.population))}/>
                     <div className={'flex gap'}>
-                        <InfoBlock caption='Area' text={checkProperty(countryInfo.area, `${countryInfo.area} km2`)}/>
+                        <InfoBlock caption='Area' text={checkProperty(countryInfo.area, `${formatNumber(countryInfo.area)} km²`)}/>
                         <InfoBlock caption='Independent' text={countryInfo.independent ? 'Yes' : 'No'}/>
                     </div>
                     <div className={'flex gap'}>
