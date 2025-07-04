@@ -1,0 +1,11 @@
+.div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    transition: all 0.3s ease;
+}
+
+.compareDiv {
+    max-width: 760px;
+    width: 100%;
+}

@@ -5,6 +5,8 @@ const initialState = {
     loading: false,
     error: false,
     item: null,
+    compare: false,
+    compareItem: null
 }
 
 export const countrySlice = createSlice({
@@ -14,6 +16,9 @@ export const countrySlice = createSlice({
         removeCountry: (state) => {
             state.item = null
         },
+        setCompare: (state, action) => {
+            state.compare = action.payload
+        }
     },
     extraReducers: builder => {
         builder
@@ -22,7 +27,11 @@ export const countrySlice = createSlice({
             })
             .addCase(fetchCountry.fulfilled, (state, action) => {
                 state.loading = false
-                state.item = action.payload
+                if (state.compare) {
+                    state.compareItem = action.payload
+                } else {
+                    state.item = action.payload
+                }
             })
             .addCase(fetchCountry.rejected, (state) => {
                 state.loading = false
@@ -31,4 +40,4 @@ export const countrySlice = createSlice({
     }
 })
 
-export const {removeCountry} = countrySlice.actions
+export const {removeCountry, setCompare} = countrySlice.actions

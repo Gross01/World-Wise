@@ -3,7 +3,7 @@ import '../../index.css'
 import styles from './App.module.css'
 import {Routes, Route} from "react-router-dom";
 import Home from "../../pages/home/Home";
-import Country from "../../pages/country/Country";
+import CountryPage from "../../pages/country-page/CountryPage";
 
 function App() {
 
@@ -13,7 +13,7 @@ function App() {
             <main className={styles.main}>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path='countries/:cca3' element={<Country />}/>
+                    <Route path='countries/:cca3' element={<CountryPage />} />
                 </Routes>
             </main>
           </>
