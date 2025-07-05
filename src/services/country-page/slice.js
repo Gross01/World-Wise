@@ -1,12 +1,17 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {fetchCountry} from "./thunk";
+import {fetchCompareCountry, fetchCountry} from "./thunk";
 
 const initialState = {
-    loading: false,
-    error: false,
-    item: null,
-    compare: false,
-    compareItem: null
+    countryInfo: {
+        loading: false,
+        error: false,
+        item: null
+    },
+    compareCountryInfo: {
+        loading: false,
+        error: false,
+        item: null
+    }
 }
 
 export const countrySlice = createSlice({
@@ -14,28 +19,32 @@ export const countrySlice = createSlice({
     initialState,
     reducers: {
         removeCountry: (state) => {
-            state.item = null
+            state.compareCountryInfo.item = null
         },
-        setCompare: (state, action) => {
-            state.compare = action.payload
-        }
     },
     extraReducers: builder => {
         builder
             .addCase(fetchCountry.pending, (state) => {
-                state.loading = true
+                state.countryInfo.loading = true
             })
             .addCase(fetchCountry.fulfilled, (state, action) => {
-                state.loading = false
-                if (state.compare) {
-                    state.compareItem = action.payload
-                } else {
-                    state.item = action.payload
-                }
+                state.countryInfo.loading = false
+                state.countryInfo.item = action.payload
             })
             .addCase(fetchCountry.rejected, (state) => {
-                state.loading = false
-                state.error = true
+                state.compareCountryInfo.loading = false
+                state.compareCountryInfo.error = true
+            })
+            .addCase(fetchCompareCountry.pending, (state) => {
+                state.compareCountryInfo.loading = true
+            })
+            .addCase(fetchCompareCountry.fulfilled, (state, action) => {
+                state.compareCountryInfo.loading = false
+                state.compareCountryInfo.item = action.payload
+            })
+            .addCase(fetchCompareCountry.rejected, (state) => {
+                state.compareCountryInfo.loading = false
+                state.compareCountryInfo.error = true
             })
     }
 })

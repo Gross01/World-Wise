@@ -2,11 +2,10 @@ import React from 'react';
 import styles from './CountryPick.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate, useParams} from "react-router-dom";
-import {fetchCountry} from "../../services/country-page/thunk";
+import {fetchCompareCountry} from "../../services/country-page/thunk";
 import {fetchCountries} from "../../services/countries/thunk";
 import CompassPreloader from "../../UI/compass-preloader/CompassPreloader";
 import CloseButton from "../../UI/close-button/CloseButton";
-import {setCompare} from "../../services/country-page/slice";
 
 const CountryPick = () => {
     const countries = useSelector(state => state.countries.filteredItems)
@@ -26,7 +25,11 @@ const CountryPick = () => {
 
     const closeButtonHandler = () => {
         navigate(`/countries/${params.cca3}`)
-        setCompare(false)
+    }
+
+    const onClick = (cca3) => {
+        dispatch(fetchCompareCountry(cca3))
+        navigate(`/countries/${params.cca3}/?compare=true&with=${cca3}`)
     }
 
     return (
@@ -39,12 +42,12 @@ const CountryPick = () => {
                         countries.map(country => {
                             return (
                                 <Link
-                                    onClick={() => dispatch(fetchCountry(country.cca3))}
+                                    onClick={() => onClick(country.cca3)}
                                     className={styles.link}
                                     to={`/countries/${params.cca3}/?compare=true&with=${country.cca3}`}
                                 >
                                     <li className={styles.li}>
-                                        <img src={country.flags.png} width='50'/>
+                                        <img src={country.flags.png} width='50' alt={country.flags.alt}/>
                                         <span className={styles.text}>{country.name.common}</span>
                                     </li>
                                 </Link>

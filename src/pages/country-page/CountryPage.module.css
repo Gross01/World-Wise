@@ -1,11 +1,28 @@
 .div {
+    gap: 50px;
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     transition: all 0.3s ease;
+    align-items: center;
+}
+
+@media screen and (min-width: 1024px) {
+    .div {
+        flex-direction: row;
+    }
+
 }
 
 .compareDiv {
     max-width: 760px;
     width: 100%;
+    align-self: center;
+}
+
+@media screen and (min-width: 1024px) {
+    .compareDiv {
+        align-self: flex-start;
+    }
 }

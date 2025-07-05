@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {fetchCountry} from "../../services/country-page/thunk";
-import {removeCountry, setCompare} from "../../services/country-page/slice";
+import React, {useEffect} from 'react';
+import {fetchCompareCountry, fetchCountry} from "../../services/country-page/thunk";
+import {removeCountry} from "../../services/country-page/slice";
 import {useParams, useSearchParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import Country from "../country/Country";
+import Country from "../../components/country/Country";
 import CountryPick from "../../components/country-pick/Country-Pick";
 import styles from './CountryPage.module.css'
 import {AnimatePresence, motion} from "framer-motion";
@@ -16,35 +16,25 @@ const CountryPage = () => {
     const [query] = useSearchParams()
     const compare = query.get("compare");
     const withQuery = query.get("with");
-    const [animationEnd, setAnimationEnd] = useState(false);
-    const loading = useSelector(state => state.countryPage.loading)
+    const loading = useSelector(state => state.countryPage.countryInfo.loading)
+    const compareLoading = useSelector(state => state.countryPage.compareCountryInfo.loading)
+    const allCountriesLoading = useSelector(state => state.countries.loading)
 
     useEffect(() => {
         dispatch(fetchCountry(params.cca3))
 
+        if (withQuery) {
+            dispatch(fetchCompareCountry(withQuery))
+        }
+
         return () => {
             dispatch(removeCountry())
-            dispatch(setCompare(false))
         }
-    }, [dispatch, params.cca3])
-
-    useEffect(() => {
-        if (withQuery) {
-            const timerId = setTimeout(() => {
-                setAnimationEnd(true)
-            }, 200)
-
-            return () => {
-                clearTimeout(timerId)
-            }
-        } else {
-            setAnimationEnd(false)
-        }
-    }, [withQuery, animationEnd])
+    }, [dispatch, params.cca3, withQuery])
 
     const compareDivStyle = compare ? {display: 'block'} : {display: 'none'};
 
-    if (loading) {
+    if (loading || allCountriesLoading || compareLoading) {
         return (
             <div style={{width: '100%', height: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <CompassPreloader />
@@ -68,7 +58,7 @@ const CountryPage = () => {
                             </motion.div>
                         )}
                     </AnimatePresence>
-                    {compare && withQuery && animationEnd &&(
+                    {compare && withQuery && (
                         <Country compare={true}/>
                     )}
                 </div>

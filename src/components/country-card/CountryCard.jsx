@@ -3,15 +3,13 @@ import styles from "./CountryCard.module.css";
 import InfoBlock from "../../UI/info-block/InfoBlock";
 import {checkProperty} from "../../utils/check-property";
 import {safeObjectValues} from "../../utils/safe-object-values";
-import {Link, useParams, useSearchParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import Map from "../map/Map";
 import BackButton from "../../UI/back-button/BackButton";
 import {formatNumber} from '../../utils/format-number'
 
-const CountryCard = ({countryInfo, compareHandler}) => {
+const CountryCard = ({countryInfo, compareHandler, compare}) => {
 
-    const [query] = useSearchParams()
-    const withQuery = query.get('with')
     const params = useParams()
 
     if (countryInfo) {
@@ -75,7 +73,7 @@ const CountryCard = ({countryInfo, compareHandler}) => {
                     </InfoBlock>
                 </div>
             </div>
-            <BackButton path={withQuery ? `/countries/${params.cca3}/?compare=true` : '/'} extraClass={styles.backButton}/>
+            <BackButton path={compare ? `/countries/${params.cca3}/?compare=true` : '/'} extraClass={styles.backButton}/>
         </>
     );
 };
