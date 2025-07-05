@@ -3,7 +3,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     transition: all 0.3s ease;
     align-items: center;
 }
@@ -12,7 +12,13 @@
     .div {
         flex-direction: row;
     }
+}
 
+
+@media screen and (min-width: 1600px) {
+    .div {
+        gap: 90px;
+    }
 }
 
 .compareDiv {

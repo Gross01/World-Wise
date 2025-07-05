@@ -31,7 +31,9 @@ export const countriesSlice = createSlice({
             })
             .addCase(fetchCountries.fulfilled, (state, action) => {
                 state.loading = false
-                state.items = action.payload
+                state.items = [...action.payload].sort((a, b) => {
+                    return a.name.common.localeCompare(b.name.common)
+                })
                 state.filteredItems = [...action.payload].sort((a, b) => {
                     return a.name.common.localeCompare(b.name.common)
                 })

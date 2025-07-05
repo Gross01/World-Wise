@@ -24,9 +24,11 @@ const CountryCard = ({countryInfo, compareHandler, compare}) => {
         ? `${countryInfo?.timezones[0]} to ${countryInfo?.timezones[countryInfo?.timezones.length - 1]}`
         : countryInfo?.timezones[0]
 
+    const flagStyle = countryInfo?.name.common === 'Nepal' ? {maxWidth: '150px', border: 'none'} : {}
+
     return (
         <>
-            <img className={styles.flag} src={countryInfo?.flags.png} alt={countryInfo?.flags.alt}/>
+            <img className={`${styles.flag}`} src={countryInfo?.flags.png} alt={countryInfo?.flags.alt} style={flagStyle}/>
             <h2 className={styles.title}>{countryInfo?.name.common}</h2>
             <h3 className={styles.subtitle}>Oficially: {countryInfo?.name.official}</h3>
 

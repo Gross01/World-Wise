@@ -8,7 +8,7 @@ import CompassPreloader from "../../UI/compass-preloader/CompassPreloader";
 import CloseButton from "../../UI/close-button/CloseButton";
 
 const CountryPick = () => {
-    const countries = useSelector(state => state.countries.filteredItems)
+    const countries = useSelector(state => state.countries.items)
     const loading = useSelector(state => state.countries.loading)
     const error = useSelector(state => state.countries.error)
     const navigate = useNavigate();
@@ -33,9 +33,9 @@ const CountryPick = () => {
     }
 
     return (
-        <div className={styles.div}>
+        <div className={`${styles.div}`}>
             <h2 className={styles.h2}>Choose county to compare</h2>
-            <ul className={styles.ul}>
+            <ul className={`${styles.ul}  custom-scrollbar`}>
                 {countries &&
                     !loading &&
                     !error &&
