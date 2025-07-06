@@ -1,5 +1,6 @@
 .div {
-    gap: 50px;
+    gap: 20px;
+    padding: 0 30px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -22,7 +23,7 @@
 }
 
 .compareDiv {
-    max-width: 760px;
+    max-width: 800px;
     width: 100%;
     align-self: center;
 }

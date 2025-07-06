@@ -30,9 +30,7 @@ const Map = ({ latlng }) => {
                 attribution=''
                 url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
             />
-            <Marker position={[lat, lng]}>
-
-            </Marker>
+            <Marker position={[lat, lng]}></Marker>
         </MapContainer>
     );
 };

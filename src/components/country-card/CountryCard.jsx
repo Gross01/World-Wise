@@ -3,7 +3,7 @@ import styles from "./CountryCard.module.css";
 import InfoBlock from "../../UI/info-block/InfoBlock";
 import {checkProperty} from "../../utils/check-property";
 import {safeObjectValues} from "../../utils/safe-object-values";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import Map from "../map/Map";
 import BackButton from "../../UI/back-button/BackButton";
 import {formatNumber} from '../../utils/format-number'
@@ -11,6 +11,7 @@ import {formatNumber} from '../../utils/format-number'
 const CountryCard = ({countryInfo, compareHandler, compare}) => {
 
     const params = useParams()
+    const navigate = useNavigate();
 
     if (countryInfo) {
         countryInfo = countryInfo[0]
@@ -25,6 +26,10 @@ const CountryCard = ({countryInfo, compareHandler, compare}) => {
         : countryInfo?.timezones[0]
 
     const flagStyle = countryInfo?.name.common === 'Nepal' ? {maxWidth: '150px', border: 'none'} : {}
+
+    const quizButtonHandler = () => {
+        navigate(`/quiz/${countryInfo?.cca3}`)
+    }
 
     return (
         <>
@@ -60,7 +65,7 @@ const CountryCard = ({countryInfo, compareHandler, compare}) => {
                         <InfoBlock caption='Area' text={checkProperty(countryInfo.area, `${formatNumber(countryInfo.area)} km²`)}/>
                         <InfoBlock caption='Independent' text={countryInfo.independent ? 'Yes' : 'No'}/>
                     </div>
-                    <button className={styles.button} type='button'>Take quiz</button>
+                    <button onClick={quizButtonHandler} className={styles.button} type='button'>Take quiz</button>
                     <div className={'flex gap'}>
                         <InfoBlock caption='Continent' text={checkProperty(countryInfo.continents, countryInfo.continents.join(', '))}/>
                         <InfoBlock caption='Demonym' text={checkProperty(countryInfo.demonyms.eng.f)}/>
@@ -70,12 +75,12 @@ const CountryCard = ({countryInfo, compareHandler, compare}) => {
                         <InfoBlock caption='FIFA code' text={checkProperty(countryInfo.fifa)}/>
                     </div>
                     <InfoBlock caption='Timezones' text={timezones}/>
-                    <InfoBlock caption='Coat Of Arms' text={checkProperty(countryInfo.coatOfArms, '')} extraStyles={{maxHeight: '200px'}}>
+                    <InfoBlock caption='Coat Of Arms' text={checkProperty(countryInfo.coatOfArms, '')} extraStyles={{maxHeight: '200px', overflow: 'hidden'}}>
                         <img src={countryInfo.coatOfArms.png} alt={'coatOfArms'} height='150' style={{margin: '0 auto'}}/>
                     </InfoBlock>
                 </div>
             </div>
-            <BackButton path={compare ? `/countries/${params.cca3}/?compare=true` : '/'} extraClass={styles.backButton}/>
+            <BackButton path={compare ? `/countries/${params.cca3}/?compare=true` : '/'} extraClass={styles.backButton} compare={compare}/>
         </>
     );
 };

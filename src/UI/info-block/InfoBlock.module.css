@@ -1,5 +1,5 @@
 .infoBlock {
-    max-height: 72px;
+    max-height: 80px;
     overflow: auto;
     display: flex;
     flex-direction: column;

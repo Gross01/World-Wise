@@ -5,7 +5,16 @@
 }
 
 body {
-    background-color: rgb(245, 245, 245)
+    background-color: rgb(245, 245, 245);
+}
+
+body,
+button,
+a {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
 }
 
 .flex {

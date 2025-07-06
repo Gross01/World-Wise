@@ -1,46 +1,13 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
-import {COUNTRY_PAGE_URL} from "../../utils/constants";
+import {fetchCountryData} from "../../utils/api";
 
 export const fetchCountry = createAsyncThunk(
     'country/fetchCountry',
-    async (cca3, thunkAPI) => {
-        try {
-            const response = await fetch(COUNTRY_PAGE_URL + cca3, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-
-            if (!response.ok) {
-                thunkAPI.rejectWithValue('Ошибка запроса')
-            }
-
-            return await response.json()
-        } catch (e) {
-            thunkAPI.rejectWithValue(e.message)
-        }
-    }
+    (cca3, thunkAPI) => fetchCountryData(cca3, thunkAPI)
 )
 
 export const fetchCompareCountry = createAsyncThunk(
     'country/fetchCompareCountry',
-    async (cca3, thunkAPI) => {
-        try {
-            const response = await fetch(COUNTRY_PAGE_URL + cca3, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-
-            if (!response.ok) {
-                thunkAPI.rejectWithValue('Ошибка запроса')
-            }
-
-            return await response.json()
-        } catch (e) {
-            thunkAPI.rejectWithValue(e.message)
-        }
-    }
+    (cca3, thunkAPI) => fetchCountryData(cca3, thunkAPI)
 )
+

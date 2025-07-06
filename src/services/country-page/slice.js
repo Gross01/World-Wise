@@ -49,4 +49,4 @@ export const countrySlice = createSlice({
     }
 })
 
-export const {removeCountry, setCompare} = countrySlice.actions
+export const {removeCountry} = countrySlice.actions
