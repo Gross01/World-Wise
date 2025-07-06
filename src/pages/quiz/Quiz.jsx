@@ -23,7 +23,7 @@ const Quiz = () => {
             dispatch(fetchCountry(params.cca3))
         }
         return () => {
-            deleteQuestions()
+            dispatch(deleteQuestions())
         }
     }, [countryInfo, dispatch, params.cca3]);
 
