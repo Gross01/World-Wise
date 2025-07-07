@@ -22,6 +22,7 @@ const CountryPage = () => {
 
     useEffect(() => {
         dispatch(fetchCountry(params.cca3))
+        localStorage.removeItem('quizIndex')
 
         if (withQuery) {
             dispatch(fetchCompareCountry(withQuery))
@@ -36,9 +37,7 @@ const CountryPage = () => {
 
     if (loading || allCountriesLoading || compareLoading) {
         return (
-            <div style={{width: '100%', height: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                <CompassPreloader />
-            </div>
+            <CompassPreloader />
         )
     }
 

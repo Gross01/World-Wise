@@ -3,7 +3,9 @@ import styles from './CompassPreloader.module.css'
 
 const CompassPreloader = () => {
     return (
-        <div className={styles.loader}></div>
+        <div style={{width: '100%', height: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <div className={styles.loader}></div>
+        </div>
     );
 };
 

@@ -8,7 +8,10 @@ import styles from './Quiz.module.css'
 
 const Quiz = () => {
 
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(() => {
+        const currentIndex = localStorage.getItem('quizIndex')
+        return currentIndex ? parseInt(currentIndex, 10) : 0;
+    });
     const [rightAnswerCount, setRightAnswerCount] = useState(0);
     const quizQuestions = useSelector(state => state.quizQuestions.items);
     let countryInfo = useSelector(state => state.countryPage.countryInfo.item)
@@ -22,6 +25,7 @@ const Quiz = () => {
         if (!countryInfo) {
             dispatch(fetchCountry(params.cca3))
         }
+
         return () => {
             dispatch(deleteQuestions())
         }
@@ -45,10 +49,12 @@ const Quiz = () => {
 
     const startQuiz = () => {
         setCurrentQuestionIndex(currentQuestionIndex + 1)
+        localStorage.setItem('quizIndex', 1);
     }
 
     const answerQuiz = (e, answer) => {
         setCurrentQuestionIndex(currentQuestionIndex + 1)
+        localStorage.setItem('quizIndex', currentQuestionIndex + 1);
         if (e.target.textContent === answer) {
             setRightAnswerCount(rightAnswerCount + 1)
         }
@@ -59,11 +65,13 @@ const Quiz = () => {
             [countryInfo[0], countries]
         ))
         setCurrentQuestionIndex(1)
+        setRightAnswerCount(0)
+        localStorage.setItem('quizIndex', 1);
     }
 
     const index = currentQuestionIndex - 1
 
-    const mainDivStyle = currentQuestionIndex === 0 || currentQuestionIndex === quizQuestions.length ? {justifyContent: 'center', gap: '0'} : {justifyContent: 'flex-end'};
+    const mainDivStyle = currentQuestionIndex === 0 || currentQuestionIndex > quizQuestions.length ? {justifyContent: 'center', gap: '0'} : {justifyContent: 'flex-end'};
 
     return (
         <div className={styles.div} style={mainDivStyle}>
@@ -78,7 +86,7 @@ const Quiz = () => {
                 </div>
             }
             {currentQuestionIndex > 0 &&
-                currentQuestionIndex < quizQuestions.length &&
+                currentQuestionIndex <= quizQuestions.length &&
                 <>
                     <p className={styles.question}>{quizQuestions[index].question}</p>
                     <div className={styles.buttonsDiv}>
@@ -89,11 +97,14 @@ const Quiz = () => {
                     </div>
                 </>
             }
-            {currentQuestionIndex === quizQuestions.length &&
+            {currentQuestionIndex > quizQuestions.length &&
                 <div style={{display: 'flex', flexDirection: 'column' ,gap: '50px', marginTop: '-20px'}}>
                     <p className={styles.result}>{`You're result: ${rightAnswerCount}/${quizQuestions.length}`}</p>
                     <div style={{display: 'flex', gap: '20px'}}>
-                        <button onClick={() => navigate('/')} className={styles.button}>Go to home</button>
+                        <button onClick={() => {
+                            navigate('/')
+                            localStorage.removeItem('quizIndex')
+                        }} className={styles.button}>Go to home</button>
                         <button onClick={tryAgain} className={styles.button}>Try again</button>
                     </div>
                 </div>

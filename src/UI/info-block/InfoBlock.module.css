@@ -1,6 +1,7 @@
 .infoBlock {
     max-height: 80px;
     overflow: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
