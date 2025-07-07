@@ -1,0 +1,77 @@
+.flag {
+    border-radius: 10px;
+    border: 2px solid #000000;
+    max-width: 250px;
+}
+
+.title {
+    font-size: 3rem;
+    margin-top: 1rem;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    font-weight: 400;
+}
+
+.caption {
+    font-size: 0.9rem;
+}
+
+.text {
+    font-size: 1.2rem;
+}
+
+.countryInfo {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+}
+
+.asideBlock {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 10px;
+}
+
+.link {
+    text-decoration: none;
+    color: #000000;
+    font-size: 1.1rem;
+}
+
+.link:hover {
+    opacity: 0.6;
+}
+
+.link:active {
+    opacity: 0.3;
+}
+
+.backButton {
+    position: absolute;
+    top: 35px;
+    left: 35px;
+}
+
+.button {
+    border-radius: 10px;
+    border: 2px solid #e4e4e4;
+    background-color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    cursor: pointer;
+}
+
+.button:hover {
+    opacity: 0.6;
+}
+
+.button:active {
+    opacity: 0.3;
+}

@@ -1,0 +1,22 @@
+.infoBlock {
+    max-height: 80px;
+    overflow: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #e4e4e4;
+    width: 100%;
+    gap: 5px;
+}
+
+.caption {
+    opacity: 0.5;
+}
+
+.text {
+    font-size: 1.2rem;
+}
+

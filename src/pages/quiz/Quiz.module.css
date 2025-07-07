@@ -1,0 +1,73 @@
+.div {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    gap: 10vw;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+}
+
+.greetDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.greetText {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 1.7rem;
+}
+
+.button {
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid #e4e4e4;
+    cursor: pointer;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.button:hover {
+    opacity: 0.6;
+}
+
+.button:active {
+    opacity: 0.3;
+}
+
+.question {
+    font-size: 3rem;
+}
+
+.buttonsDiv {
+    width: 100%;
+    padding: 0 50px;
+    align-self: flex-end;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.answer {
+    border-radius: 10px;
+    padding: 80px 0;
+    border: 2px solid #e4e4e4;
+    background: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.answer:hover {
+    opacity: 0.6;
+}
+
+.answer:active {
+    opacity: 0.3;
+}
+
+.result {
+    font-size: 2.5rem;
+}

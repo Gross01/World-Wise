@@ -1,0 +1,60 @@
+.div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 45px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 2px solid #e4e4e4;
+    border-radius: 10px;
+}
+
+.h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.ul {
+    overflow: auto;
+    max-height: 800px;
+    width: 100%;
+    list-style: none;
+    margin-top: 30px;
+    padding-right: 10px;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.link:hover {
+    opacity: .7;
+}
+
+.link:active {
+    opacity: .3;
+}
+
+.li {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-top: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;
+    gap: 20px;
+    padding: 20px;
+}
+
+.text {
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.closeButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+

@@ -1,0 +1,20 @@
+.button {
+    border: 1px solid black;
+    opacity: 0.8;
+    width: 30px;
+    height: 30px;
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: rgb(230, 230, 230);
+}
+
+.button:active {
+    opacity: .6;
+}
