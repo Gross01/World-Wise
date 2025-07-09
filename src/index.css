@@ -1,3 +1,29 @@
+:root {
+    --logo: #000;
+    --main-bg: rgb(245, 245, 245);
+    --header-bg: rgba(255, 255, 255, 0.7);
+    --text: #333333;
+    --country-item-bg: #ffffff;
+    --country-card-bg: rgba(255, 255, 255, 0.7);
+    --buttons-bg: rgba(255, 255, 255, 0.7);
+    --border-main: #e4e4e4;
+    --border-flag: #000;
+    --info-block: transparent;
+}
+
+[data-theme="dark"] {
+    --logo: rgb(214, 214, 214);
+    --main-bg: rgb(27, 27, 30);
+    --header-bg: rgba(32, 33, 36);
+    --text: rgb(214, 214, 214);
+    --country-item-bg: rgba(32, 33, 36);
+    --country-card-bg: rgba(32, 33, 36);
+    --buttons-bg: rgb(27, 27, 30);
+    --border-main: transparent;
+    --border-flag: transparent;
+    --info-block: rgb(27, 27, 30);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,7 +31,8 @@
 }
 
 body {
-    background-color: rgb(245, 245, 245);
+    background-color: var(--main-bg);
+    color: var(--text);
 }
 
 body,
@@ -15,6 +42,11 @@ a {
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
+}
+
+button,
+a {
+    color: var(--text)
 }
 
 .flex {
