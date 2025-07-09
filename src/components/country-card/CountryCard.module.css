@@ -1,6 +1,6 @@
 .flag {
     border-radius: 10px;
-    border: 2px solid #000000;
+    border: 2px solid var(--border-flag);
     max-width: 250px;
 }
 

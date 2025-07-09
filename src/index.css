@@ -1,5 +1,7 @@
 :root {
     --logo: #000;
+    --back-btn: #000;
+    --btn-hover: rgb(230, 230, 230);
     --main-bg: rgb(245, 245, 245);
     --header-bg: rgba(255, 255, 255, 0.7);
     --text: #333333;
@@ -8,20 +10,30 @@
     --buttons-bg: rgba(255, 255, 255, 0.7);
     --border-main: #e4e4e4;
     --border-flag: #000;
+    --border-input: #333333;
     --info-block: transparent;
+    --loader-bg: #fff;
+    --loader-arrow: #000;
+    --scroller: rgba(0, 0, 0, 0.5);
 }
 
 [data-theme="dark"] {
     --logo: rgb(214, 214, 214);
+    --back-btn: rgb(214, 214, 214);
+    --btn-hover: rgb(0, 0, 0, 0.2);
     --main-bg: rgb(27, 27, 30);
     --header-bg: rgba(32, 33, 36);
     --text: rgb(214, 214, 214);
     --country-item-bg: rgba(32, 33, 36);
     --country-card-bg: rgba(32, 33, 36);
-    --buttons-bg: rgb(27, 27, 30);
+    --buttons-bg: rgb(30, 30, 33);
     --border-main: transparent;
     --border-flag: transparent;
-    --info-block: rgb(27, 27, 30);
+    --border-input: rgba(228, 228, 228, .7);
+    --info-block: rgb(30, 30, 33);
+    --loader-bg: rgba(32, 33, 36);
+    --loader-arrow: #fff;
+    --scroller: rgb(228, 228, 228, 0.7);
 }
 
 * {
@@ -75,12 +87,12 @@ a {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--scroller);
     height: 10%;
     border-radius: 2px;
     cursor: pointer;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--scroller);
 }

@@ -12,9 +12,13 @@
 }
 
 .button:hover {
-    background: rgb(230, 230, 230);
+    background: var(--btn-hover);
 }
 
 .button:active {
     opacity: .1;
+}
+
+.img {
+    fill: var(--back-btn);
 }

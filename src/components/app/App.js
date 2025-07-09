@@ -13,8 +13,6 @@ import CompassPreloader from "../../UI/compass-preloader/CompassPreloader";
 function App() {
     const countries = useSelector(state => state.countries.filteredItems)
     const loading = useSelector(state => state.countries.loading)
-    const error = useSelector(state => state.countries.error)
-
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -25,7 +23,11 @@ function App() {
 
     if (loading) {
         return (
-            <CompassPreloader />
+            <>
+                <AppHeader />
+                <CompassPreloader />
+            </>
+
         );
     }
 
