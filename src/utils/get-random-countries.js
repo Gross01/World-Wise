@@ -1,3 +1,5 @@
+import {COUNTRIES_WITHOUT_QUIZ} from '../utils/constants'
+
 export function shuffle (arr) {
     const result = arr.slice()
 
@@ -13,6 +15,7 @@ export function getRandomCountries(countries, currentCountry, count = 3) {
     const filtered = countries.filter(
         country =>
             country.name.common !== currentCountry.name.common &&
+            !COUNTRIES_WITHOUT_QUIZ.includes(currentCountry.name.common) &&
             Array.isArray(country.capital) && country.capital.length > 0
     );
 

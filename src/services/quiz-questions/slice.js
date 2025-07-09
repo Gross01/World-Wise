@@ -1,15 +1,16 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {getRandomCountries, shuffle} from "../../utils/get-random-countries";
 import {formatNumber} from "../../utils/format-number";
-import {CONTINENTS} from "../../utils/constants";
+import {CONTINENTS, DEALING_CODES} from "../../utils/constants";
 
 const initialState = {
     items: []
 };
 
 const getCurrency = (countryInfo) => {
-    const name = countryInfo.currencies[Object.keys(countryInfo.currencies)[0]].name
-    const symbol = countryInfo.currencies[Object.keys(countryInfo.currencies)[0]].symbol
+    const name = countryInfo?.currencies[Object.keys(countryInfo.currencies)[0]]?.name.split(' ').at(-1)
+    const symbol = countryInfo?.currencies[Object.keys(countryInfo.currencies)[0]]?.symbol
+    // const capitalizeName = name.slice(0, 1).toUpperCase() + name.slice(1)
     return `${name} - ${symbol}`
 }
 
@@ -45,7 +46,10 @@ export const quizQuestions = createSlice({
                 }
             )
 
-            const dealingCodes = getRandomCountries(countries, countryInfo).map(country => country.idd.root)
+            const dealingCodes = shuffle(DEALING_CODES)
+                                    .filter(code => code !== countryInfo.idd.root)
+                                    .slice(0, 3)
+
             questions.push(
                 {
                     question: ` What is the international dialing code of ${countryInfo.name.common}?`,
@@ -72,7 +76,10 @@ export const quizQuestions = createSlice({
                 }
             )
 
-            const currencies = getRandomCountries(countries, countryInfo).map(country => getCurrency(country))
+            let currencies = Array.from(new Set(countries.map(country => getCurrency(country))))
+            currencies = shuffle(currencies.filter(curr => curr !== getCurrency(countryInfo))).slice(0, 3)
+            console.log(currencies)
+
             questions.push(
                 {
                     question: `Currency of ${countryInfo.name.common} is?`,
@@ -81,7 +88,8 @@ export const quizQuestions = createSlice({
                 }
             )
 
-            const languages = getRandomCountries(countries, countryInfo).map(country => getLanguage(country))
+            let languages = Array.from(new Set(countries.map(country => getLanguage(country))))
+            languages = shuffle(languages.filter(lang => lang !== getLanguage(countryInfo))).slice(0, 3)
             questions.push(
                 {
                     question: `Main language in ${countryInfo.name.common} is?`,

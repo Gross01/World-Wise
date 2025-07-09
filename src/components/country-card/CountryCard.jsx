@@ -7,6 +7,8 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import Map from "../map/Map";
 import BackButton from "../../UI/back-button/BackButton";
 import {formatNumber} from '../../utils/format-number'
+import {COUNTRIES_WITHOUT_QUIZ} from '../../utils/constants'
+
 
 const CountryCard = ({countryInfo, compareHandler, compare}) => {
 
@@ -30,6 +32,8 @@ const CountryCard = ({countryInfo, compareHandler, compare}) => {
     const quizButtonHandler = () => {
         navigate(`/quiz/${countryInfo?.cca3}`)
     }
+
+    const quizDisabled = COUNTRIES_WITHOUT_QUIZ.includes(countryInfo?.name.common) ? true : false
 
     return (
         <>
@@ -65,7 +69,7 @@ const CountryCard = ({countryInfo, compareHandler, compare}) => {
                         <InfoBlock caption='Area' text={checkProperty(countryInfo.area, `${formatNumber(countryInfo.area)} km²`)}/>
                         <InfoBlock caption='Independent' text={countryInfo.independent ? 'Yes' : 'No'}/>
                     </div>
-                    <button onClick={quizButtonHandler} className={styles.button} type='button'>Take quiz</button>
+                    <button disabled={quizDisabled} onClick={quizButtonHandler} className={styles.button} type='button'>Take quiz</button>
                     <div className={'flex gap'}>
                         <InfoBlock caption='Continent' text={checkProperty(countryInfo.continents, countryInfo.continents.join(', '))}/>
                         <InfoBlock caption='Demonym' text={checkProperty(countryInfo.demonyms.eng.f)}/>

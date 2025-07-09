@@ -23,6 +23,7 @@ const CountryPage = () => {
     useEffect(() => {
         dispatch(fetchCountry(params.cca3))
         localStorage.removeItem('quizIndex')
+        localStorage.removeItem('rac')
 
         if (withQuery) {
             dispatch(fetchCompareCountry(withQuery))

@@ -10,3 +10,12 @@ export const CONTINENTS = [
     'Oceania',
     'South America',
 ]
+
+export const DEALING_CODES = ['+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9']
+
+export const COUNTRIES_WITHOUT_QUIZ = [
+    'Antarctica',
+    'Bouvet Island',
+    'Heard Island and McDonald Islands',
+    'Macau'
+]

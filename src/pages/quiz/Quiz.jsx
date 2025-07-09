@@ -12,7 +12,10 @@ const Quiz = () => {
         const currentIndex = localStorage.getItem('quizIndex')
         return currentIndex ? parseInt(currentIndex, 10) : 0;
     });
-    const [rightAnswerCount, setRightAnswerCount] = useState(0);
+    const [rightAnswerCount, setRightAnswerCount] = useState(() => {
+        const count = localStorage.getItem('rac')
+        return count ? parseInt(count, 10) : 0
+    });
     const quizQuestions = useSelector(state => state.quizQuestions.items);
     let countryInfo = useSelector(state => state.countryPage.countryInfo.item)
     const countries = useSelector(state => state.countries.items);
@@ -57,6 +60,7 @@ const Quiz = () => {
         localStorage.setItem('quizIndex', currentQuestionIndex + 1);
         if (e.target.textContent === answer) {
             setRightAnswerCount(rightAnswerCount + 1)
+            localStorage.setItem('rac', rightAnswerCount + 1)
         }
     }
 
@@ -67,6 +71,7 @@ const Quiz = () => {
         setCurrentQuestionIndex(1)
         setRightAnswerCount(0)
         localStorage.setItem('quizIndex', 1);
+        localStorage.setItem('rac', 0)
     }
 
     const index = currentQuestionIndex - 1
@@ -104,7 +109,9 @@ const Quiz = () => {
                         <button onClick={() => {
                             navigate('/')
                             localStorage.removeItem('quizIndex')
-                        }} className={styles.button}>Go to home</button>
+                            localStorage.removeItem('rac')
+                        }} 
+                        className={styles.button}>Go to home</button>
                         <button onClick={tryAgain} className={styles.button}>Try again</button>
                     </div>
                 </div>
