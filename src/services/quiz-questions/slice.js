@@ -10,7 +10,6 @@ const initialState = {
 const getCurrency = (countryInfo) => {
     const name = countryInfo?.currencies[Object.keys(countryInfo.currencies)[0]]?.name.split(' ').at(-1)
     const symbol = countryInfo?.currencies[Object.keys(countryInfo.currencies)[0]]?.symbol
-    // const capitalizeName = name.slice(0, 1).toUpperCase() + name.slice(1)
     return `${name} - ${symbol}`
 }
 
@@ -26,7 +25,6 @@ export const quizQuestions = createSlice({
             const [countryInfo, countries] = action.payload
 
             const questions = []
-
             const capitals = getRandomCountries(countries, countryInfo).map(country => country.capital[0])
             questions.push(
                 {
@@ -49,7 +47,6 @@ export const quizQuestions = createSlice({
             const dealingCodes = shuffle(DEALING_CODES)
                                     .filter(code => code !== countryInfo.idd.root)
                                     .slice(0, 3)
-
             questions.push(
                 {
                     question: ` What is the international dialing code of ${countryInfo.name.common}?`,
@@ -78,8 +75,6 @@ export const quizQuestions = createSlice({
 
             let currencies = Array.from(new Set(countries.map(country => getCurrency(country))))
             currencies = shuffle(currencies.filter(curr => curr !== getCurrency(countryInfo))).slice(0, 3)
-            console.log(currencies)
-
             questions.push(
                 {
                     question: `Currency of ${countryInfo.name.common} is?`,

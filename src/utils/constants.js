@@ -17,5 +17,5 @@ export const COUNTRIES_WITHOUT_QUIZ = [
     'Antarctica',
     'Bouvet Island',
     'Heard Island and McDonald Islands',
-    'Macau'
+    'Macau',
 ]
