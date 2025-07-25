@@ -25,7 +25,7 @@ const Quiz = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!countryInfo) {
+        if (!countryInfo || countryInfo[0].cca3 !== params.cca3) {
             dispatch(fetchCountry(params.cca3))
         }
 

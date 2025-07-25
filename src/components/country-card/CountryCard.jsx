@@ -3,7 +3,7 @@ import styles from "./CountryCard.module.css";
 import InfoBlock from "../../UI/info-block/InfoBlock";
 import {checkProperty} from "../../utils/check-property";
 import {safeObjectValues} from "../../utils/safe-object-values";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams, useSearchParams} from "react-router-dom";
 import Map from "../map/Map";
 import BackButton from "../../UI/back-button/BackButton";
 import {formatNumber} from '../../utils/format-number'
@@ -14,6 +14,8 @@ const CountryCard = ({countryInfo, compareHandler, compare}) => {
 
     const params = useParams()
     const navigate = useNavigate();
+    const [query] = useSearchParams()
+    const withQuery = query.get("with");
 
     if (countryInfo) {
         countryInfo = countryInfo[0]
@@ -30,6 +32,10 @@ const CountryCard = ({countryInfo, compareHandler, compare}) => {
     const flagStyle = countryInfo?.name.common === 'Nepal' ? {maxWidth: '150px', border: 'none'} : {}
 
     const quizButtonHandler = () => {
+        if (compare) {
+            navigate(`/quiz/${withQuery}`)
+            return
+        }
         navigate(`/quiz/${countryInfo?.cca3}`)
     }
 
