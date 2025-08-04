@@ -1,5 +1,5 @@
 .header {
-    padding: 10px 90px;
+    padding: 10px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -9,4 +9,15 @@
 
 .logo {
     fill: var(--logo);
+    max-width: 150px;
+}
+
+@media screen and (min-width: 545px) {
+    .header {
+        padding: 10px 90px;
+    }
+
+    .logo {
+        max-width: 230px;
+    }
 }

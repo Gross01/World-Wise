@@ -1,14 +1,17 @@
 import { MapContainer, TileLayer, Marker} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import marker from '../../images/marker-icon.png'
+import markerShadow from '../../images/marker-shadow.png'
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
-    iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+    iconUrl: marker,
+    shadowUrl: markerShadow,
+    iconRetinaUrl: null,
     iconSize: [20, 30],
     iconAnchor: [10, 30],
     popupAnchor: [0, -30],
-    shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
     shadowSize: [30, 30],
     shadowAnchor: [10, 30]
 });
