@@ -27,13 +27,6 @@ function App() {
                 <AppHeader />
                 <CompassPreloader />
             </>
-
-        );
-    }
-
-    if (!countries) {
-        return (
-            <CompassPreloader />
         );
     }
 

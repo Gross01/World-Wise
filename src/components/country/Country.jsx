@@ -2,7 +2,7 @@ import React, {useCallback} from 'react';
 import {useSelector} from "react-redux";
 import styles from './Country.module.css'
 import CountryCard from "../../components/country-card/CountryCard";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 
 const Country = ({compare}) => {
     const countryInfo = useSelector(state => state.countryPage.countryInfo.item)
@@ -11,10 +11,16 @@ const Country = ({compare}) => {
     const compareLoading = useSelector(state => state.countryPage.compareCountryInfo.loading)
     const navigate = useNavigate();
     const params = useParams();
+    const [query] = useSearchParams()
+    const withQuery = query.get("with");
 
     const compareHandler = useCallback(() => {
+        if (compare) {
+            navigate(`/countries/${withQuery}/?compare=true`)
+            return
+        }
         navigate(`/countries/${params.cca3}/?compare=true`)
-    }, [navigate, params.cca3])
+    }, [navigate, params.cca3, withQuery, compare])
 
     return (
         !loading &&
