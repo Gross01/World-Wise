@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {fetchCompareCountry, fetchCountry} from "../../services/country-page/thunk";
-import {removeCountry} from "../../services/country-page/slice";
 import {useParams, useSearchParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import Country from "../../components/country/Country";
@@ -27,10 +26,6 @@ const CountryPage = () => {
 
         if (withQuery) {
             dispatch(fetchCompareCountry(withQuery))
-        }
-
-        return () => {
-            dispatch(removeCountry())
         }
     }, [dispatch, params.cca3, withQuery])
 

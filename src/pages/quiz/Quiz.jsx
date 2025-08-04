@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {fetchCountry} from "../../services/country-page/thunk";
 import {useNavigate, useParams} from "react-router-dom";
@@ -7,7 +7,7 @@ import {createQuestions, deleteQuestions} from "../../services/quiz-questions/sl
 import styles from './Quiz.module.css'
 
 const Quiz = () => {
-
+    const params = useParams()
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(() => {
         const currentIndex = localStorage.getItem('quizIndex')
         return currentIndex ? parseInt(currentIndex, 10) : 0;
@@ -17,11 +17,17 @@ const Quiz = () => {
         return count ? parseInt(count, 10) : 0
     });
     const quizQuestions = useSelector(state => state.quizQuestions.items);
-    let countryInfo = useSelector(state => state.countryPage.countryInfo.item)
+    let countryInfo = useSelector((state) => {
+
+        if (state.countryPage.countryInfo.item && state.countryPage.countryInfo.item[0].cca3 === params.cca3) {
+             return state.countryPage.countryInfo.item
+        }
+        
+        return state.countryPage.compareCountryInfo.item
+    })
     const countries = useSelector(state => state.countries.items);
     const loading = useSelector(state => state.countryPage.countryInfo.loading)
     const dispatch = useDispatch();
-    const params = useParams()
     const navigate = useNavigate();
 
     useEffect(() => {
