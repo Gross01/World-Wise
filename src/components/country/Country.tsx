@@ -5,10 +5,10 @@ import CountryCard from "../country-card/CountryCard";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 
 type Props = {
-    compare: boolean
+    compare?: boolean
 }
 
-const Country = ({compare}: Props) => {
+const Country = ({compare = false}: Props) => {
     const countryInfo = useSelector(state => state.countryPage.countryInfo.item)
     const compareCountryInfo = useSelector(state => state.countryPage.compareCountryInfo.item)
     const loading = useSelector(state => state.countryPage.countryInfo.loading)
@@ -25,6 +25,10 @@ const Country = ({compare}: Props) => {
         }
         navigate(`/countries/${params.cca3}/?compare=true`)
     }, [navigate, params.cca3, withQuery, compare])
+
+    if (loading || compareLoading || !countryInfo) {
+        return null;
+    }
 
     return (
         !loading &&

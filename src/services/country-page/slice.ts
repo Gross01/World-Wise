@@ -1,16 +1,17 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {fetchCompareCountry, fetchCountry} from "./thunk";
+import { CountryInfo } from "../../utils/types/country-info";
 
 type TInitialState = {
     countryInfo: {
         loading: boolean,
         error: boolean,
-        item: null
+        item: null | CountryInfo
     },
     compareCountryInfo: {
         loading: boolean,
         error: boolean,
-        item: null | any
+        item: null | CountryInfo
     }
 }
 
@@ -42,7 +43,7 @@ export const countrySlice = createSlice({
             })
             .addCase(fetchCountry.fulfilled, (state, action) => {
                 state.countryInfo.loading = false
-                state.countryInfo.item = action.payload
+                state.countryInfo.item = action.payload[0]
             })
             .addCase(fetchCountry.rejected, (state) => {
                 state.compareCountryInfo.loading = false
@@ -53,7 +54,7 @@ export const countrySlice = createSlice({
             })
             .addCase(fetchCompareCountry.fulfilled, (state, action) => {
                 state.compareCountryInfo.loading = false
-                state.compareCountryInfo.item = action.payload
+                state.compareCountryInfo.item = action.payload[0]
             })
             .addCase(fetchCompareCountry.rejected, (state) => {
                 state.compareCountryInfo.loading = false

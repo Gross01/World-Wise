@@ -1,4 +1,3 @@
-import React from 'react';
 import CountrySearch from "../../components/country-search/CountrySearch";
 import CountryList from "../../components/country-list/Country-List";
 

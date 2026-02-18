@@ -1,7 +1,12 @@
 import React from 'react';
 import styles from './CloseButton.module.css'
 
-const CloseButton = ({buttonHandler, extraClass}) => {
+type Props = {
+    buttonHandler: () => void
+    extraClass: string
+}
+
+const CloseButton = ({buttonHandler, extraClass}: Props) => {
     return (
         <button className={`${styles.button} ${extraClass}`} type='button' onClick={buttonHandler}>
             <svg className={styles.img} width="35px" height="35px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

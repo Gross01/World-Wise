@@ -4,7 +4,9 @@ import L from 'leaflet';
 import marker from '../../images/marker-icon.png'
 import markerShadow from '../../images/marker-shadow.png'
 
+//@ts-ignore
 delete L.Icon.Default.prototype._getIconUrl;
+
 L.Icon.Default.mergeOptions({
     iconUrl: marker,
     shadowUrl: markerShadow,
@@ -16,7 +18,11 @@ L.Icon.Default.mergeOptions({
     shadowAnchor: [10, 30]
 });
 
-const Map = ({ latlng }) => {
+type Props = {
+    latlng: number[]
+}
+
+const Map = ({ latlng }: Props) => {
     if (!latlng || latlng.length !== 2) return null;
 
     const [lat, lng] = latlng;

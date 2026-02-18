@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {fetchCompareCountry, fetchCountry} from "../../services/country-page/thunk";
 import {useParams, useSearchParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/store";
 import Country from "../../components/country/Country";
 import CountryPick from "../../components/country-pick/Country-Pick";
 import styles from './CountryPage.module.css'
@@ -20,11 +20,13 @@ const CountryPage = () => {
     const allCountriesLoading = useSelector(state => state.countries.loading)
 
     useEffect(() => {
+        //@ts-ignore
         dispatch(fetchCountry(params.cca3))
         localStorage.removeItem('quizIndex')
         localStorage.removeItem('rac')
 
         if (withQuery) {
+            //@ts-ignore
             dispatch(fetchCompareCountry(withQuery))
         }
     }, [dispatch, params.cca3, withQuery])

@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from "./CountryCard.module.css";
 import InfoBlock from "../../UI/info-block/InfoBlock";
 import {checkProperty} from "../../utils/check-property";
@@ -8,9 +7,10 @@ import Map from "../map/Map";
 import BackButton from "../../UI/back-button/BackButton";
 import {formatNumber} from '../../utils/format-number'
 import {COUNTRIES_WITHOUT_QUIZ} from '../../utils/constants'
+import { CountryInfo } from '../../utils/types/country-info';
 
 type Props = {
-    countryInfo: any;
+    countryInfo: CountryInfo | null;
     compareHandler: () => void;
     compare: boolean
 }
@@ -22,17 +22,22 @@ const CountryCard = ({countryInfo, compareHandler, compare}: Props) => {
     const [query] = useSearchParams()
     const withQuery = query.get("with");
 
+    // if (countryInfo) {
+    //     countryInfo = countryInfo[0]
+    // }
+
+    let currency, timezones = null
+
     if (countryInfo) {
-        countryInfo = countryInfo[0]
+        currency = countryInfo?.currencies
+            ? countryInfo.currencies[Object.keys(countryInfo.currencies)[0]]
+            : null;
+
+        timezones = countryInfo?.timezones.length > 1
+            ? `${countryInfo?.timezones[0]} to ${countryInfo?.timezones[countryInfo?.timezones.length - 1]}`
+            : countryInfo?.timezones[0]
     }
 
-    const currency = countryInfo?.currencies
-        ? countryInfo.currencies[Object.keys(countryInfo.currencies)[0]]
-        : null;
-
-    const timezones = countryInfo?.timezones.length > 1
-        ? `${countryInfo?.timezones[0]} to ${countryInfo?.timezones[countryInfo?.timezones.length - 1]}`
-        : countryInfo?.timezones[0]
 
     const flagStyle = countryInfo?.name.common === 'Nepal' ? {maxWidth: '150px', border: 'none'} : {}
 
@@ -44,7 +49,7 @@ const CountryCard = ({countryInfo, compareHandler, compare}: Props) => {
         navigate(`/quiz/${countryInfo?.cca3}`)
     }
 
-    const quizDisabled = COUNTRIES_WITHOUT_QUIZ.includes(countryInfo?.name.common) ? true : false
+    const quizDisabled = COUNTRIES_WITHOUT_QUIZ.includes(countryInfo?.name.common ?? '') ? true : false
 
     return (
         <>
@@ -54,44 +59,44 @@ const CountryCard = ({countryInfo, compareHandler, compare}: Props) => {
 
             <div className={styles.countryInfo}>
                 <div className={styles.asideBlock}>
-                    <InfoBlock caption='Capital' text={checkProperty(countryInfo.capital)}/>
+                    <InfoBlock caption='Capital' text={checkProperty(countryInfo?.capital)}/>
                     <div className='flex gap'>
-                        <InfoBlock caption='Region' text={checkProperty(countryInfo.region)}/>
-                        <InfoBlock caption='Subregion' text={checkProperty(countryInfo.subregion)}/>
+                        <InfoBlock caption='Region' text={checkProperty(countryInfo?.region)}/>
+                        <InfoBlock caption='Subregion' text={checkProperty(countryInfo?.subregion)}/>
                     </div>
                     <button className={styles.button} type='button' onClick={compareHandler}>Compare</button>
                     <InfoBlock caption='Currency' text={checkProperty(currency, `${currency?.name} ${currency?.symbol}`)}/>
                     <div className='flex gap'>
-                        <InfoBlock caption='Language' text={checkProperty(countryInfo.languages, safeObjectValues(countryInfo.languages)[0] )}/>
-                        <InfoBlock caption='Calling Code' text={checkProperty(countryInfo.idd.root)}/>
+                        <InfoBlock caption='Language' text={checkProperty(countryInfo?.languages, safeObjectValues(countryInfo?.languages)[0] )}/>
+                        <InfoBlock caption='Calling Code' text={checkProperty(countryInfo?.idd.root)}/>
                     </div>
 
-                    <InfoBlock caption='Borders' text={checkProperty(countryInfo.borders, '')}>
-                        {countryInfo.borders &&
+                    <InfoBlock caption='Borders' text={checkProperty(countryInfo?.borders, '')}>
+                        {countryInfo?.borders &&
                             countryInfo.borders.map((border: string) => {
                                 return <Link key={border} className={styles.link} to={`/countries/${border}`}>{border}</Link>
                             })}
                     </InfoBlock>
-                    <Map latlng={countryInfo?.latlng}/>
+                    {countryInfo && <Map latlng={countryInfo.latlng} />}
                 </div>
                 <div className={styles.asideBlock}>
-                    <InfoBlock caption='Population' text={checkProperty(countryInfo.population, formatNumber(countryInfo.population))}/>
+                    <InfoBlock caption='Population' text={checkProperty(countryInfo?.population, formatNumber(countryInfo?.population))}/>
                     <div className={'flex gap'}>
-                        <InfoBlock caption='Area' text={checkProperty(countryInfo.area, `${formatNumber(countryInfo.area)} km²`)}/>
-                        <InfoBlock caption='Independent' text={countryInfo.independent ? 'Yes' : 'No'}/>
+                        <InfoBlock caption='Area' text={checkProperty(countryInfo?.area, `${formatNumber(countryInfo?.area)} km²`)}/>
+                        <InfoBlock caption='Independent' text={countryInfo?.independent ? 'Yes' : 'No'}/>
                     </div>
                     <button disabled={quizDisabled} onClick={quizButtonHandler} className={styles.button} type='button'>Take quiz</button>
                     <div className={'flex gap'}>
-                        <InfoBlock caption='Continent' text={checkProperty(countryInfo.continents, countryInfo.continents.join(', '))}/>
-                        <InfoBlock caption='Demonym' text={checkProperty(countryInfo.demonyms.eng.f)}/>
+                        <InfoBlock caption='Continent' text={checkProperty(countryInfo?.continents, countryInfo?.continents.join(', '))}/>
+                        <InfoBlock caption='Demonym' text={checkProperty(countryInfo?.demonyms.eng.f)}/>
                     </div>
                     <div className={'flex gap'}>
-                        <InfoBlock caption='Country Code' text={checkProperty(countryInfo.cca3)}/>
-                        <InfoBlock caption='FIFA code' text={checkProperty(countryInfo.fifa)}/>
+                        <InfoBlock caption='Country Code' text={checkProperty(countryInfo?.cca3)}/>
+                        <InfoBlock caption='FIFA code' text={checkProperty(countryInfo?.fifa)}/>
                     </div>
                     <InfoBlock caption='Timezones' text={timezones}/>
-                    <InfoBlock caption='Coat Of Arms' text={checkProperty(countryInfo.coatOfArms, '')} extraStyles={{maxHeight: '200px', overflow: 'hidden'}}>
-                        <img src={countryInfo.coatOfArms.png} alt={'coatOfArms'} height='150' style={{margin: '0 auto'}}/>
+                    <InfoBlock caption='Coat Of Arms' text={checkProperty(countryInfo?.coatOfArms, '')} extraStyles={{maxHeight: '200px', overflow: 'hidden'}}>
+                        <img src={countryInfo?.coatOfArms.png} alt={'coatOfArms'} height='150' style={{margin: '0 auto'}}/>
                     </InfoBlock>
                 </div>
             </div>

@@ -6,8 +6,9 @@ import styles from './ThemeToggle.module.css'
 const ThemeToggle = () => {
     const [src, setSrc] = useState(() => {
         const theme = localStorage.getItem('darkTheme')
-        return JSON.parse(theme) ? light : dark
+        return JSON.parse(theme ?? 'false') ? light : dark
     })
+
     const [isDark, setIsDark] = useState(() => {
         const theme = localStorage.getItem('darkTheme')
         return theme ? JSON.parse(theme) : false
@@ -19,13 +20,13 @@ const ThemeToggle = () => {
 
     const onClick = () => {
         if (src === dark) {
-            localStorage.setItem('darkTheme', true)
+            localStorage.setItem('darkTheme', 'true')
             setSrc(light)
             setIsDark(true)
         }
 
         if (src === light) {
-            localStorage.setItem('darkTheme', false)
+            localStorage.setItem('darkTheme', 'false')
             setSrc(dark)
             setIsDark(false)
         }

@@ -1,8 +1,13 @@
 import React from 'react';
 import styles from "./CountryItem.module.css";
 import {useNavigate} from "react-router-dom";
+import { MainPageCountryInfo } from '../../utils/types/main-page-country-info';
 
-const CountryItem = ({country}) => {
+type Props = {
+    country: MainPageCountryInfo
+}
+
+const CountryItem = ({country}: Props) => {
 
     const navigate = useNavigate();
     const countyClass = country.name.common === 'Nepal' ? styles.nepal : ''

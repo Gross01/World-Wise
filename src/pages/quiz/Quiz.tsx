@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/store";
 import {fetchCountry} from "../../services/country-page/thunk";
 import {useNavigate, useParams} from "react-router-dom";
 import CompassPreloader from "../../UI/compass-preloader/CompassPreloader";
@@ -8,18 +8,21 @@ import styles from './Quiz.module.css'
 
 const Quiz = () => {
     const params = useParams()
+
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(() => {
         const currentIndex = localStorage.getItem('quizIndex')
         return currentIndex ? parseInt(currentIndex, 10) : 0;
     });
+
     const [rightAnswerCount, setRightAnswerCount] = useState(() => {
         const count = localStorage.getItem('rac')
         return count ? parseInt(count, 10) : 0
     });
+    
     const quizQuestions = useSelector(state => state.quizQuestions.items);
     let countryInfo = useSelector((state) => {
 
-        if (state.countryPage.countryInfo.item && state.countryPage.countryInfo.item[0].cca3 === params.cca3) {
+        if (state.countryPage.countryInfo.item && state.countryPage.countryInfo.item.cca3 === params.cca3) {
              return state.countryPage.countryInfo.item
         }
         
@@ -31,7 +34,8 @@ const Quiz = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!countryInfo || countryInfo[0].cca3 !== params.cca3) {
+        if (!countryInfo || countryInfo.cca3 !== params.cca3) {
+            //@ts-ignore
             dispatch(fetchCountry(params.cca3))
         }
 
@@ -41,9 +45,9 @@ const Quiz = () => {
     }, [countryInfo, dispatch, params.cca3]);
 
     useEffect(() => {
-        if (countryInfo && countryInfo.length > 0 && quizQuestions.length === 0) {
+        if (countryInfo && quizQuestions.length === 0) {
             dispatch(createQuestions(
-                [countryInfo[0], countries]
+                [countryInfo, countries]
             ))
         }
     }, [countryInfo, quizQuestions, dispatch, countries])
@@ -58,26 +62,26 @@ const Quiz = () => {
 
     const startQuiz = () => {
         setCurrentQuestionIndex(currentQuestionIndex + 1)
-        localStorage.setItem('quizIndex', 1);
+        localStorage.setItem('quizIndex', '1');
     }
 
-    const answerQuiz = (e, answer) => {
+    const answerQuiz = (e: React.MouseEvent<HTMLButtonElement>, answer: string) => {
         setCurrentQuestionIndex(currentQuestionIndex + 1)
-        localStorage.setItem('quizIndex', currentQuestionIndex + 1);
-        if (e.target.textContent === answer) {
+        localStorage.setItem('quizIndex', String(currentQuestionIndex + 1));
+        if (e.currentTarget.textContent === answer) {
             setRightAnswerCount(rightAnswerCount + 1)
-            localStorage.setItem('rac', rightAnswerCount + 1)
+            localStorage.setItem('rac', String(rightAnswerCount + 1))
         }
     }
 
     const tryAgain = () => {
         dispatch(createQuestions(
-            [countryInfo[0], countries]
+            [countryInfo, countries]
         ))
         setCurrentQuestionIndex(1)
         setRightAnswerCount(0)
-        localStorage.setItem('quizIndex', 1);
-        localStorage.setItem('rac', 0)
+        localStorage.setItem('quizIndex', '1');
+        localStorage.setItem('rac', '0')
     }
 
     const index = currentQuestionIndex - 1
@@ -89,9 +93,9 @@ const Quiz = () => {
             {currentQuestionIndex === 0 &&
                 countryInfo &&
                 <div className={styles.greetDiv}>
-                    <img src={countryInfo[0]?.flags.png} alt={countryInfo[0]?.flags.alt} width='200'/>
+                    <img src={countryInfo?.flags.png} alt={countryInfo?.flags.alt} width='200'/>
                     <p className={styles.greetText}>
-                        {`Are you ready to answer a few questions about ${countryInfo[0]?.name?.common}?`}
+                        {`Are you ready to answer a few questions about ${countryInfo?.name?.common}?`}
                     </p>
                     <button onClick={startQuiz} className={styles.button} type='button'>Get started!</button>
                 </div>

@@ -1,6 +1,7 @@
 import {COUNTRIES_URL, COUNTRY_PAGE_URL} from "./constants";
 
-export async function fetchCountryData(cca3, thunkAPI) {
+//@ts-ignore
+export async function fetchCountryData(cca3: string, thunkAPI) {
     try {
         const response = await fetch(COUNTRY_PAGE_URL + cca3, {
             method: 'GET',
@@ -15,11 +16,12 @@ export async function fetchCountryData(cca3, thunkAPI) {
 
         return await response.json()
     } catch (e) {
-        thunkAPI.rejectWithValue(e.message)
+        thunkAPI.rejectWithValue((e as Error).message)
     }
 }
 
-export async function fetchAllCountries (_, thunkAPI) {
+//@ts-ignore
+export async function fetchAllCountries (_: any, thunkAPI) {
     try {
         const response = await fetch(COUNTRIES_URL, {
             method: 'GET',
@@ -34,6 +36,6 @@ export async function fetchAllCountries (_, thunkAPI) {
 
         return await response.json();
     } catch (e) {
-        thunkAPI.rejectWithValue(e.message)
+        thunkAPI.rejectWithValue((e as Error).message)
     }
 }

@@ -2,7 +2,13 @@ import React from 'react';
 import styles from './BackButton.module.css';
 import {useNavigate} from "react-router-dom";
 
-const BackButton = ({extraClass, path, compare}) => {
+type Props = {
+    extraClass: string;
+    path: string;
+    compare: boolean
+}
+
+const BackButton = ({extraClass, path, compare}: Props) => {
 
     const navigate = useNavigate()
 

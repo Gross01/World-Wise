@@ -50,8 +50,9 @@
   },
   "homepage": "https://gross01.github.io/World-Wise",
   "devDependencies": {
+    "@types/leaflet": "^1.9.21",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "typescript": "^5.9.3"
+    "typescript": "^4.9.5"
   }
 }

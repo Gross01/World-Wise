@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import styles from './CountrySearch.module.css';
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch, useSelector} from '../../services/store'
 import {sortAndFilterCountries} from '../../services/countries/slice'
 import {setSearchQuery} from "../../services/search-query/slice";
 
@@ -22,7 +22,7 @@ const CountrySearch = () => {
         }
     }, [value, dispatch, countries])
 
-    const onChange = (e) => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value)
         dispatch(setSearchQuery(e.target.value))
     }

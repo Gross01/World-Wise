@@ -1,8 +1,8 @@
-import React from 'react';
-import {useSelector} from "react-redux";
+import {useSelector} from "../../services/store";
 import styles from './CountryList.module.css'
 import CountryItem from "../country-item/CountryItem";
 import CompassPreloader from "../../UI/compass-preloader/CompassPreloader";
+import { MainPageCountryInfo } from '../../utils/types/main-page-country-info';
 
 const CountryList = () => {
 
@@ -23,7 +23,7 @@ const CountryList = () => {
                 {!loading &&
                     !error &&
                     countries &&
-                    countries.map((country, i) => (
+                    countries.map((country: MainPageCountryInfo) => (
                         <CountryItem country={country} key={country.name.common} />
                     ))
                 }

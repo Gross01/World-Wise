@@ -1,10 +1,10 @@
-import React from 'react';
 import styles from './CountryPick.module.css'
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/store";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {fetchCompareCountry} from "../../services/country-page/thunk";
 import CompassPreloader from "../../UI/compass-preloader/CompassPreloader";
 import CloseButton from "../../UI/close-button/CloseButton";
+import { CountryPickItem } from '../../utils/types/country-pick-item';
 
 const CountryPick = () => {
     const countries = useSelector(state => state.countries.items)
@@ -21,7 +21,7 @@ const CountryPick = () => {
         navigate(`/countries/${params.cca3}`)
     }
 
-    const onClick = (cca3) => {
+    const onClick = (cca3: any) => {
         dispatch(fetchCompareCountry(cca3))
         navigate(`/countries/${params.cca3}/?compare=true&with=${cca3}`)
     }
@@ -31,7 +31,7 @@ const CountryPick = () => {
             <h2 className={styles.h2}>Choose county to compare</h2>
             <ul className={`${styles.ul}  custom-scrollbar`}>
                 {
-                    countries.map(country => {
+                    countries.map((country: CountryPickItem) => {
                         return (
                             <Link
                                 onClick={() => onClick(country.cca3)}
