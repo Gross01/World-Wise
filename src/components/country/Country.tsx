@@ -1,10 +1,14 @@
 import React, {useCallback} from 'react';
-import {useSelector} from "react-redux";
+import {useSelector} from "../../services/store";
 import styles from './Country.module.css'
-import CountryCard from "../../components/country-card/CountryCard";
+import CountryCard from "../country-card/CountryCard";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 
-const Country = ({compare}) => {
+type Props = {
+    compare: boolean
+}
+
+const Country = ({compare}: Props) => {
     const countryInfo = useSelector(state => state.countryPage.countryInfo.item)
     const compareCountryInfo = useSelector(state => state.countryPage.compareCountryInfo.item)
     const loading = useSelector(state => state.countryPage.countryInfo.loading)

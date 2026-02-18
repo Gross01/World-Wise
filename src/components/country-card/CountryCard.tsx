@@ -9,8 +9,13 @@ import BackButton from "../../UI/back-button/BackButton";
 import {formatNumber} from '../../utils/format-number'
 import {COUNTRIES_WITHOUT_QUIZ} from '../../utils/constants'
 
+type Props = {
+    countryInfo: any;
+    compareHandler: () => void;
+    compare: boolean
+}
 
-const CountryCard = ({countryInfo, compareHandler, compare}) => {
+const CountryCard = ({countryInfo, compareHandler, compare}: Props) => {
 
     const params = useParams()
     const navigate = useNavigate();
@@ -63,7 +68,7 @@ const CountryCard = ({countryInfo, compareHandler, compare}) => {
 
                     <InfoBlock caption='Borders' text={checkProperty(countryInfo.borders, '')}>
                         {countryInfo.borders &&
-                            countryInfo.borders.map((border) => {
+                            countryInfo.borders.map((border: string) => {
                                 return <Link key={border} className={styles.link} to={`/countries/${border}`}>{border}</Link>
                             })}
                     </InfoBlock>

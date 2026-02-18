@@ -1,7 +1,20 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {fetchCompareCountry, fetchCountry} from "./thunk";
 
-const initialState = {
+type TInitialState = {
+    countryInfo: {
+        loading: boolean,
+        error: boolean,
+        item: null
+    },
+    compareCountryInfo: {
+        loading: boolean,
+        error: boolean,
+        item: null | any
+    }
+}
+
+const initialState: TInitialState = {
     countryInfo: {
         loading: false,
         error: false,

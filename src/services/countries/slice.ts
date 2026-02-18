@@ -1,7 +1,14 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {fetchCountries} from "./thunk";
 
-const initialState = {
+type TInitialState = {
+    loading: boolean;
+    error: boolean;
+    items: null | any;
+    filteredItems: null | any
+}
+
+const initialState: TInitialState = {
     loading: false,
     error: false,
     items: null,

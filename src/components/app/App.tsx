@@ -7,7 +7,7 @@ import CountryPage from "../../pages/country-page/CountryPage";
 import Quiz from "../../pages/quiz/Quiz";
 import React, {useEffect} from "react";
 import {fetchCountries} from "../../services/countries/thunk";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/store";
 import CompassPreloader from "../../UI/compass-preloader/CompassPreloader";
 
 function App() {

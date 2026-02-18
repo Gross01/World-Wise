@@ -3,17 +3,27 @@ import {getRandomCountries, shuffle} from "../../utils/get-random-countries";
 import {formatNumber} from "../../utils/format-number";
 import {CONTINENTS, DEALING_CODES} from "../../utils/constants";
 
-const initialState = {
+type Question = {
+    question: string,
+    answer: string,
+    options: string[]
+}
+
+type TInitialState = {
+    items: Question[]
+}
+
+const initialState: TInitialState = {
     items: []
 };
 
-const getCurrency = (countryInfo) => {
+const getCurrency = (countryInfo: any) => {
     const name = countryInfo?.currencies[Object.keys(countryInfo.currencies)[0]]?.name.split(' ').at(-1)
     const symbol = countryInfo?.currencies[Object.keys(countryInfo.currencies)[0]]?.symbol
     return `${name} - ${symbol}`
 }
 
-const getLanguage = (countryInfo) => {
+const getLanguage = (countryInfo: any) => {
     return countryInfo.languages[Object.keys(countryInfo.languages)[0]]
 }
 
@@ -25,7 +35,8 @@ export const quizQuestions = createSlice({
             const [countryInfo, countries] = action.payload
 
             const questions = []
-            const capitals = getRandomCountries(countries, countryInfo).map(country => country.capital[0])
+            const capitals = getRandomCountries(countries, countryInfo).map((country: any) => country.capital[0])
+            
             questions.push(
                 {
                     question: `Name the capital of ${countryInfo.name.common}`,
@@ -34,7 +45,7 @@ export const quizQuestions = createSlice({
                 }
             )
 
-            const shuffledContinents = shuffle(CONTINENTS.filter(continent => continent !== countryInfo.continents[0]))
+            const shuffledContinents = shuffle(CONTINENTS.filter((continent: string) => continent !== countryInfo.continents[0]))
             const continents = shuffledContinents.slice(0, 3)
             questions.push(
                 {
@@ -45,7 +56,7 @@ export const quizQuestions = createSlice({
             )
 
             const dealingCodes = shuffle(DEALING_CODES)
-                                    .filter(code => code !== countryInfo.idd.root)
+                                    .filter((code: string) => code !== countryInfo.idd.root)
                                     .slice(0, 3)
             questions.push(
                 {
@@ -55,7 +66,7 @@ export const quizQuestions = createSlice({
                 }
             )
 
-            const populations = getRandomCountries(countries, countryInfo).map(country => formatNumber(country.population))
+            const populations = getRandomCountries(countries, countryInfo).map((country: any) => formatNumber(country.population))
             questions.push(
                 {
                     question: `Population of ${countryInfo.name.common} is?`,
@@ -64,7 +75,7 @@ export const quizQuestions = createSlice({
                 }
             )
 
-            const area = getRandomCountries(countries, countryInfo).map(country => `${formatNumber(country.area)} km²`)
+            const area = getRandomCountries(countries, countryInfo).map((country: any) => `${formatNumber(country.area)} km²`)
             questions.push(
                 {
                     question: `Area of ${countryInfo.name.common} is?`,
@@ -73,7 +84,7 @@ export const quizQuestions = createSlice({
                 }
             )
 
-            let currencies = Array.from(new Set(countries.map(country => getCurrency(country))))
+            let currencies = Array.from(new Set(countries.map((country: any) => getCurrency(country))))
             currencies = shuffle(currencies.filter(curr => curr !== getCurrency(countryInfo))).slice(0, 3)
             questions.push(
                 {
@@ -83,7 +94,7 @@ export const quizQuestions = createSlice({
                 }
             )
 
-            let languages = Array.from(new Set(countries.map(country => getLanguage(country))))
+            let languages = Array.from(new Set(countries.map((country: any) => getLanguage(country))))
             languages = shuffle(languages.filter(lang => lang !== getLanguage(countryInfo))).slice(0, 3)
             questions.push(
                 {
