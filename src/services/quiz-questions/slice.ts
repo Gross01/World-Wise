@@ -2,12 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {getRandomCountries, shuffle} from "../../utils/get-random-countries";
 import {formatNumber} from "../../utils/format-number";
 import {CONTINENTS, DEALING_CODES} from "../../utils/constants";
-
-type Question = {
-    question: string,
-    answer: string,
-    options: string[]
-}
+import { Question } from "../../utils/types/question";
 
 type TInitialState = {
     items: Question[]

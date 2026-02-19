@@ -1,22 +1,20 @@
 import { MapContainer, TileLayer, Marker} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import marker from '../../images/marker-icon.png'
+import markerIcon from '../../images/marker-icon.png'
 import markerShadow from '../../images/marker-shadow.png'
 
-//@ts-ignore
-delete L.Icon.Default.prototype._getIconUrl;
+const DefaultIcon = L.icon({
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+  iconSize: [20, 30],
+  iconAnchor: [10, 30],
+  popupAnchor: [0, -30],
+  shadowSize: [30, 30],
+  shadowAnchor: [10, 30],
+})
 
-L.Icon.Default.mergeOptions({
-    iconUrl: marker,
-    shadowUrl: markerShadow,
-    iconRetinaUrl: null,
-    iconSize: [20, 30],
-    iconAnchor: [10, 30],
-    popupAnchor: [0, -30],
-    shadowSize: [30, 30],
-    shadowAnchor: [10, 30]
-});
+L.Marker.prototype.options.icon = DefaultIcon
 
 type Props = {
     latlng: number[]

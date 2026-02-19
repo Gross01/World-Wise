@@ -20,13 +20,14 @@ const CountryPage = () => {
     const allCountriesLoading = useSelector(state => state.countries.loading)
 
     useEffect(() => {
-        //@ts-ignore
-        dispatch(fetchCountry(params.cca3))
-        localStorage.removeItem('quizIndex')
-        localStorage.removeItem('rac')
+        if (params.cca3) {
+            dispatch(fetchCountry(params.cca3))
+            localStorage.removeItem('quizIndex')
+            localStorage.removeItem('rac')
+        }
+
 
         if (withQuery) {
-            //@ts-ignore
             dispatch(fetchCompareCountry(withQuery))
         }
     }, [dispatch, params.cca3, withQuery])

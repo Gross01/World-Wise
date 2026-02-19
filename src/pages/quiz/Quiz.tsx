@@ -35,8 +35,9 @@ const Quiz = () => {
 
     useEffect(() => {
         if (!countryInfo || countryInfo.cca3 !== params.cca3) {
-            //@ts-ignore
-            dispatch(fetchCountry(params.cca3))
+            if (params.cca3) {
+                dispatch(fetchCountry(params.cca3))
+            }  
         }
 
         return () => {
@@ -51,14 +52,6 @@ const Quiz = () => {
             ))
         }
     }, [countryInfo, quizQuestions, dispatch, countries])
-
-    if (loading) {
-        return (
-            <div style={{width: '100%', height: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                <CompassPreloader />
-            </div>
-        )
-    }
 
     const startQuiz = () => {
         setCurrentQuestionIndex(currentQuestionIndex + 1)
@@ -87,6 +80,14 @@ const Quiz = () => {
     const index = currentQuestionIndex - 1
 
     const mainDivStyle = currentQuestionIndex === 0 || currentQuestionIndex > quizQuestions.length ? {justifyContent: 'center', gap: '0'} : {justifyContent: 'flex-end'};
+
+    if (loading) {
+        return (
+            <div style={{width: '100%', height: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                <CompassPreloader />
+            </div>
+        )
+    }
 
     return (
         <div className={styles.div} style={mainDivStyle}>

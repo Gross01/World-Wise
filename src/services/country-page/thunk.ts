@@ -1,15 +1,14 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
 import {fetchCountryData} from "../../utils/api";
+import { CountryInfo } from '../../utils/types/country-info';
 
-export const fetchCountry = createAsyncThunk(
+export const fetchCountry = createAsyncThunk <CountryInfo[], string>(
     'country/fetchCountry',
-    //@ts-ignore
-    (cca3, thunkAPI) => fetchCountryData(cca3, thunkAPI)
+    (cca3, _) => fetchCountryData(cca3)
 )
 
-export const fetchCompareCountry = createAsyncThunk(
+export const fetchCompareCountry = createAsyncThunk <CountryInfo[], string>(
     'country/fetchCompareCountry',
-    //@ts-ignore
-    (cca3, thunkAPI) => fetchCountryData(cca3, thunkAPI)
+    (cca3, _) => fetchCountryData(cca3)
 )
 

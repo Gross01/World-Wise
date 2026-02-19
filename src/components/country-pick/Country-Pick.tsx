@@ -31,6 +31,7 @@ const CountryPick = () => {
             <h2 className={styles.h2}>Choose county to compare</h2>
             <ul className={`${styles.ul}  custom-scrollbar`}>
                 {
+                    countries &&
                     countries.map((country: CountryPickItem) => {
                         return (
                             <Link

@@ -5,7 +5,7 @@ import {Routes, Route} from "react-router-dom";
 import Home from "../../pages/home/Home";
 import CountryPage from "../../pages/country-page/CountryPage";
 import Quiz from "../../pages/quiz/Quiz";
-import React, {useEffect} from "react";
+import {useEffect} from "react";
 import {fetchCountries} from "../../services/countries/thunk";
 import {useDispatch, useSelector} from "../../services/store";
 import CompassPreloader from "../../UI/compass-preloader/CompassPreloader";

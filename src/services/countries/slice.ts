@@ -1,18 +1,19 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {fetchCountries} from "./thunk";
+import { MainPageCountryInfo } from "../../utils/types/main-page-country-info";
 
 type TInitialState = {
     loading: boolean;
     error: boolean;
-    items: null | any;
-    filteredItems: null | any
+    items: MainPageCountryInfo[] | null;
+    filteredItems: MainPageCountryInfo[] | null;
 }
 
 const initialState: TInitialState = {
     loading: false,
     error: false,
     items: null,
-    filteredItems: null
+    filteredItems: null,
 }
 
 export const countriesSlice = createSlice({
@@ -20,15 +21,20 @@ export const countriesSlice = createSlice({
     initialState,
     reducers: {
             sortAndFilterCountries: (state, action) => {
-                const sortedCountries = [...state.items].sort((a, b) => {
-                    return a.name.common.localeCompare(b.name.common)
-                })
 
-                state.filteredItems = action.payload 
-                    ?   sortedCountries.filter(country => 
-                            country.name.common.toLowerCase().includes(action.payload.toLowerCase())
-                        )
-                    :   sortedCountries
+                let sortedCountries
+
+                if (state.items) {
+                    sortedCountries = [...state.items].sort((a, b) => {
+                        return a.name.common.localeCompare(b.name.common)
+                    })
+
+                    state.filteredItems = action.payload 
+                        ?   sortedCountries.filter(country => 
+                                country.name.common.toLowerCase().includes(action.payload.toLowerCase())
+                            )
+                        :   sortedCountries
+                }
             }
     },
     extraReducers: builder => {
